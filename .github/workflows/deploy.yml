@@ -27,7 +27,6 @@ jobs:
       - name: Run tests
         run: npm test
 
-  # 🚀 Job 2: Deploy (only if tests pass, only on main branch)
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -41,4 +40,6 @@ jobs:
         uses: bervProject/railway-deploy@main
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
+        with:
+          service: ${{ secrets.RAILWAY_SERVICE_ID }}
+          detach: false
